@@ -1,0 +1,8 @@
+.autotest
+History.txt
+Manifest.txt
+README.txt
+Rakefile
+bin/tpauth
+lib/tpauth.rb
+test/test_tpauth.rb
