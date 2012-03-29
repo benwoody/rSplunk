@@ -2,17 +2,18 @@
 
 == DESCRIPTION:
 
-This is a gem to request auth tokens and verify a users credintials.
+This is a gem to request auth tokens and verify a users credintials for tpSplunk.
 
 == SYNOPSIS:
 
-require 'tpauth'
+require 'splunk'
 
-foo = Tpauth::Token.full('email address', 'password')
+foo = Splunk::Auth.new
+foo.token('email address', 'password')
 
 == REQUIREMENTS:
 
-install tpauth gem
+install splunk gem
 
 == INSTALL:
 
@@ -22,11 +23,8 @@ gem install tpauth/pkg/tpauth-0.7.4.gem
 
 == Upcoming Features:
 
-* Add the ability to set token duration
-* Return token only
-* Finish testing/spec
 
-== Contributing to tpauth
+== Contributing to splunk
 
 * Start a feature/bugfix branch.
 * Commit and push until you are happy with your contribution.

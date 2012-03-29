@@ -1,6 +1,6 @@
 module Splunk
 
-  VERSION = '0.2.1'
+  VERSION = '0.5.0'
 
   require 'net/https'
   require 'rubygems'
@@ -18,16 +18,14 @@ module Splunk
     end
 
     def session_key
-      @session_key ||= load_session_key
+      @session_key ||= token
     end
 
-    def load_session_key(user, pass)
+    def token(user, pass)
       doc = Hpricot(splunk_ssl_post_request("/services/auth/login", "username=#{user}&password=#{pass}"))
       (doc/"//sessionkey").inner_html
     end
 
   end
 
-client = Splunk::Auth.new
-out = client.load_session_key
-puts out
+end

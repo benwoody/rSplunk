@@ -3,6 +3,6 @@ History.txt
 Manifest.txt
 README.txt
 Rakefile
-bin/tpauth
-lib/tpauth.rb
-test/test_tpauth.rb
+bin/splunk
+lib/splunk.rb
+test/test_splunk.rb
