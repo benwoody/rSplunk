@@ -1,4 +1,4 @@
-= tpauth
+= tPsplunk
 
 == DESCRIPTION:
 
@@ -19,7 +19,7 @@ install splunk gem
 
 Once the repo is cloned to your machine:
 
-gem install tpauth/pkg/tpauth-0.7.4.gem
+gem install splunk/pkg/tpauth-xxx.gem
 
 == Upcoming Features:
 
