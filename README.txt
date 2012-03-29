@@ -2,7 +2,7 @@
 
 == DESCRIPTION:
 
-This is a gem to request auth tokens and verify a users credintials for tpSplunk.
+This is a gem to facilitate Splunk searches and indexing.
 
 == SYNOPSIS:
 
@@ -17,14 +17,17 @@ install splunk gem
 
 == INSTALL:
 
+git clone git@corptpsupport01:ben.woodall/tpsplunk.git
+
 Once the repo is cloned to your machine:
 
-gem install splunk/pkg/tpauth-xxx.gem
+gem install tpsplunk/pkg/splunk-xxx.gem
 
 == Upcoming Features:
+* As of now, receiving tokens is the only function
+* Full search capabilities are on the horizon
 
-
-== Contributing to splunk
+== Contributing to tPsplunk
 
 * Start a feature/bugfix branch.
 * Commit and push until you are happy with your contribution.
