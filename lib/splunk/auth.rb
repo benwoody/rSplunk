@@ -3,8 +3,6 @@ module Splunk
   class Auth
 
     def initialize(host, port)
-    # HOST = 'tpsplunk'
-    # PORT = 8089
       @host = host
       @port = port
     end

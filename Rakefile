@@ -14,7 +14,7 @@ Hoe.spec 'splunk' do
 
   developer('Ben Woodall', 'ben.woodall@theplatform.com')
 
-  # self.rubyforge_name = 'tpauthx' # if different than 'tpauth'
+  self.rubyforge_name = 'benwoody' # if different than 'tpauth'
 end
 
 

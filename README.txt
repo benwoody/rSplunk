@@ -1,4 +1,4 @@
-= tPsplunk
+= rSplunk
 
 == DESCRIPTION:
 
@@ -13,21 +13,17 @@ foo.token('email address', 'password')
 
 == REQUIREMENTS:
 
-install splunk gem
+Access to a working Splunk environment.
 
 == INSTALL:
 
-git clone git@corptpsupport01:ben.woodall/tpsplunk.git
-
-Once the repo is cloned to your machine:
-
-gem install tpsplunk/pkg/splunk-xxx.gem
+gem install rsplunk
 
 == Upcoming Features:
 * As of now, receiving tokens is the only function
 * Full search capabilities are on the horizon
 
-== Contributing to tPsplunk
+== Contributing to rSplunk
 
 * Start a feature/bugfix branch.
 * Commit and push until you are happy with your contribution.
