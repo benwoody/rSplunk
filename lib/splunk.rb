@@ -6,7 +6,7 @@ require 'hpricot'
 
 module Splunk
 
-  VERSION = '0.5.1'
+  VERSION = '0.1.1'
 
   require 'splunk/auth'
 
