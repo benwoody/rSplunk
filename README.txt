@@ -8,7 +8,7 @@ This is a gem to facilitate Splunk searches and indexing.
 
 require 'splunk'
 
-foo = Splunk::Auth.new
+foo = Splunk::Auth.new('HOST', PORT)
 foo.token('email address', 'password')
 
 == REQUIREMENTS:
