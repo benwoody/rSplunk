@@ -2,12 +2,18 @@ module Splunk
 
   class Auth
 
-    HOST = 'tpsplunk'
-    PORT = 8089
+    def initialize(host, port)
+    # HOST = 'tpsplunk'
+    # PORT = 8089
+      @host = host
+      @port = port
+    end
+
+    attr_accessor :host, :port
 
     # Initial SSL request
     def splunk_ssl_request(path, data = nil, headers = nil)
-      http = Net::HTTP.new(HOST, PORT)
+      http = Net::HTTP.new(@host, @port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       http.post(path, data, headers).body
