@@ -1,4 +1,4 @@
-module Splunk
+module Rsplunk
 
   class Auth
 

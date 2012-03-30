@@ -4,10 +4,10 @@ require 'net/https'
 require 'rubygems'
 require 'hpricot'
 
-module Splunk
+module Rsplunk
 
   VERSION = '0.1.1'
 
-  require 'splunk/auth'
+  require 'rsplunk/auth'
 
 end

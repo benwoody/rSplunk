@@ -1,6 +1,6 @@
-require "splunk"
+require "rsplunk"
 
-describe Splunk, "example test" do
+describe Rsplunk, "example test" do
   it "should have a test written for it" do
     pending "WRITE TESTS"
   end
