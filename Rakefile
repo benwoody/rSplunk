@@ -12,7 +12,7 @@ require 'hoe'
 
 Hoe.spec 'rsplunk' do
 
-  developer('Ben Woodall', 'ben.woodall@theplatform.com')
+  developer('Ben Woodall', 'mail@benwoodall.com')
 
 end
 
