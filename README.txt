@@ -8,8 +8,24 @@ This is a gem to facilitate Splunk searches and indexing.
 
 require 'splunk'
 
-foo = Rsplunk::Auth.new('HOST', PORT)
-foo.token('email address', 'password')
+=== To create a new session:
+foo = Rsplunk::Auth.new('HOST', PORT, 'username', 'password')
+=> #<Rsplunk::Auth:0x970d1b4 @pass="password", @user="username">
+
+foo.session_token
+=> "66f8ee2ab56a2e30d3a016f6b78e50ce"
+
+=== To view current search jobs:
+bar = Rsplunk::Search.new
+bar.query_jobs
+
+query_jobs can take arguements for:
+name, search, title, published, updated, etc...
+
+For example:
+bar.query_jobs("name", "title" "published")
+
+will return the owner, query string, and date queried for all current running jobs
 
 == REQUIREMENTS:
 
@@ -20,7 +36,6 @@ Access to a working Splunk environment.
 gem install rsplunk
 
 == Upcoming Features:
-* As of now, receiving tokens is the only function
 * Full search capabilities are on the horizon
 
 == Contributing to rSplunk
