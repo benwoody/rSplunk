@@ -4,12 +4,18 @@ module Rsplunk
 
 	class Search
 
-		# Dirty.  Creates a list of jobs currently running on Splunk server
-		def list_jobs(*query)
+		# Dirty.  Creates a list of jobs currently running on Splunk server.
+		# *query enters as an array.  Collection will be iterated through with
+		# the list of queries.  If no valid queries exist, returns an empty array [].
+
+		# To Do: Only accept valid queries
+		#        Memoization
+		#
+		def query_jobs(*query)
 			res = Hpricot(Rsplunk::Auth.splunk_ssl_post_request("/services/search/jobs/",
 																	nil,
-																	{'authorization' => "Splunk #{$session_token}"}))
-			# res.to_json
+																  {'authorization' => "Splunk #{$session_token}"}))
+
 			if query == []
 				res
 			else
@@ -20,23 +26,24 @@ module Rsplunk
 				end
 			end
 
-
-			# (res/"//entry").collect do |item|
-			# 	puts "Author: #{(item/"//name").inner_html}"  # Return query author
-			# 	puts "SID: #{(item/"//search").inner_html}"  # Return SID
-			# 	puts "Query: #{(item/"//title").inner_html}"  # Return query
-			# 	puts "Published: #{(item/"//published").inner_html}"
-			# 	puts "Updated: #{(item/"//updated").inner_html}"
-			# 	puts "-+-+-+-+-+-+-+-+-+-+-+-+-+-"
-			# end
-			# puts "Total Jobs: #{(res/"//opensearch:totalresults").inner_html}"
-			# puts "Items/Page: #{(res/"//opensearch:itemsperpage").inner_html}"
-			# puts "Start Index: #{(res/"//opensearch:startindex").inner_html}"
+			# Author: (item/"//name")
+			# SID: (item/"//search")
+			# Query: (item/"//title")
+			# Published: (item/"//published")
+			# Updated: (item/"//updated")
+			# Total Jobs: (res/"//opensearch:totalresults")
+			# Items/Page: (res/"//opensearch:itemsperpage")
+			# Start Index: (res/"//opensearch:startindex")
 
 		end
 
 		def create_job(query)
 		end
+
+		def delete_job(sid)
+		end
+
+
 
 
 
