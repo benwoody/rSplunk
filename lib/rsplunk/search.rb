@@ -12,14 +12,10 @@ module Rsplunk
 		#        Memoization
 		#
 		def query_jobs(*query)
-			res = Hpricot(Rsplunk::Auth.splunk_ssl_post_request("/services/search/jobs/",
-																	nil,
-																  {'authorization' => "Splunk #{$session_token}"}))
-
 			if query == []
-				res
+				search_request
 			else
-				(res/"//entry").collect do |list|
+				(search_request/"//entry").collect do |list|
 					query.collect do |item|
 						(list/"//#{item}").inner_html
 					end
@@ -37,16 +33,33 @@ module Rsplunk
 
 		end
 
-		def create_job(query)
+		def search_request
+			Hpricot(Rsplunk::Auth.splunk_ssl_post_request("/services/search/jobs/",
+																	nil,
+																  {'authorization' => "Splunk #{$session_token}"}))
 		end
+
+		def create_job(query)
+			search = "search index=internetmail #{query}"
+			res = Hpricot(Rsplunk::Auth.splunk_ssl_post_request("/services/search/jobs",
+																									"search=#{CGI::escape(search)}",
+																									{'authorization' => "Splunk #{$session_token}"}))
+			(res/"//sid").inner_html
+		end
+
+		def job_results(sid)
+			doc = Hpricot(Rsplunk::Auth.splunk_ssl_post_request("/services/search/jobs/#{sid}/events",
+                              nil,
+                              {'authorization' => "Splunk #{$session_key}"}))
+    	(doc/"/results/result").collect do | result |
+      	log_text = (result/"field[@k='_raw']/v").inner_text
+    	end
+  	end
 
 		def delete_job(sid)
+			Rsplunk::Auth.splunk_ssl_delete_request("/services/search/jobs/#{sid}",
+                            { 'authorization' => "Splunk #{$session_key}" })
 		end
-
-
-
-
-
 
 	end
 
