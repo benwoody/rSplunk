@@ -40,19 +40,18 @@ module Rsplunk
 		end
 
 		def create_job(query)
-			search = "search index=internetmail #{query}"
+			search = "search #{query}"
 			res = Hpricot(Rsplunk::Auth.splunk_ssl_post_request("/services/search/jobs",
 																									"search=#{CGI::escape(search)}",
 																									{'authorization' => "Splunk #{$session_token}"}))
-			(res/"//sid").inner_html
+
 		end
 
 		def job_results(sid)
 			doc = Hpricot(Rsplunk::Auth.splunk_ssl_post_request("/services/search/jobs/#{sid}/events",
                               nil,
                               {'authorization' => "Splunk #{$session_key}"}))
-    	(doc/"/results/result").collect do | result |
-      	log_text = (result/"field[@k='_raw']/v").inner_text
+
     	end
   	end
 
@@ -66,8 +65,7 @@ module Rsplunk
 end
 
 
- #  {elem <published> "2012-04-05T07:19:05.000-07:00" </published>}
- # {elem <updated> "2012-04-05T07:19:07.000-07:00" </updated>}
+
 
 # <entry>
 
