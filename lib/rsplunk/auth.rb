@@ -31,7 +31,8 @@ module Rsplunk
 
     # Grab token with username and password
     def create_token
-      doc = Hpricot(Rsplunk::Auth.splunk_ssl_post_request("/services/auth/login", "username=#{@user}&password=#{@pass}"))
+      doc = Hpricot(Rsplunk::Auth.splunk_ssl_post_request("/services/auth/login",
+                                                          "username=#{@user}&password=#{@pass}"))
       (doc/"//sessionkey").inner_html
     end
 
