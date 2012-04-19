@@ -29,6 +29,7 @@ module Rsplunk
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     http.post(path, data, headers).body
   end
+
   # Create and SSL GET
   def self.splunk_ssl_get_request(path, headers = nil)
     http = Net::HTTP.new(@host, @port)
@@ -36,6 +37,7 @@ module Rsplunk
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     http.get(path, headers).body
   end
+
   # Create an SSL DELETE
   def self.splunk_ssl_delete_request(path, headers = nil)
   	http = Net::HTTP.new(@host, @port)
