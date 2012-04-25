@@ -9,38 +9,27 @@ This is a gem to facilitate Splunk searches and indexing.
 require 'rsplunk'
 
 === To create a Splunk instance
-foo = Rsplunk.set('HOST', PORT)
-=> "@host, @port"
+Rsplunk.set('HOST', PORT)
+=> "https://HOST:PORT"
 
 === To create a Splunk session
-session = Rsplunk::Auth.new('username', 'password')
-=> #<Rsplunk::Auth:0x1080daf8 @pass="password", @user="username">
-
-Appending the 'session_token' method will give you your token:
-session.session_token
-=> "66f8ee2ab56a2e30d3a016f6b78e50ce"
+splunk = Rsplunk::Client.new(:username => 'USERNAME', :password => 'PASSWORD')
+=> #<Rsplunk::Client:0x8b800f8 @pass="PASSWORD", @user="USERNAME">
 
 === To view current query jobs:
-bar = Rsplunk::Search.new
-bar.query_jobs
-
-This will bring back a very unsexy XML package for you.
-
-'query_jobs' can take arguements to return certain XML parameters:
-
-For example:
-bar.query_jobs("name", "published", "title")
-
-will return the owner, published date, and query string for all current running jobs.
+splunk.list_jobs
 
 === To create a job:
-res = bar.create_job("Hello, World")
+splunk.create_job('SEARCH TERM', options)
 => "1334848433.7828"
 
 Where, "1334848433.7828" is the Search ID returned from the job.
 
+Available options can be found at:
+http://docs.splunk.com/Documentation/Splunk/4.2.2/RESTAPI/RESTsearch#POST_search.2Fjobs
+
 === To list job results:
-bar.job_results(res)
+splunk.job_results(res)
 => XML results
 
 == REQUIREMENTS:
@@ -52,8 +41,7 @@ Access to a working Splunk environment.
 gem install rsplunk
 
 == Upcoming Features:
-* Provide a timeline for Search.  As of now, it sets to 'All Time'.
-* Credentials providing: delete a query
+
 
 == Contributing to rSplunk
 
