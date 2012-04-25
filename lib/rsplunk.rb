@@ -1,12 +1,11 @@
 require 'faraday'
 require 'faraday_middleware'
-require 'hpricot'
 
 $:.unshift( File.dirname( __FILE__ ))
 
 module Rsplunk
 
-  VERSION = '0.3.0'
+  VERSION = '0.3.1'
 
   require 'rsplunk/search'
   require 'rsplunk/client'
