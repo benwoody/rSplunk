@@ -1,56 +1,44 @@
-require 'rsplunk/auth'
-
 module Rsplunk
+	module Search
 
-	class Search
-
-		# To Do: Only accept valid queries
-		#        Memoization
-
-		# List current jobs
-		def query_jobs(*query)
-			if query == []
-				search_request
-			else
-				(search_request/"//entry").collect do |list|
-					query.collect do |item|
-						(list/"//#{item}").inner_html
-					end
-				end
-			end
-
+		# Returns an XML with all of the current running jobs
+		def list_jobs
+			response = connection.get('search/jobs')
+			return_error_or_body(response, response.body)
 		end
 
-		# Create a search job
-		def create_job(query)
-			search = "search #{query}"
-			res = Hpricot(Rsplunk.splunk_ssl_post_request("/services/search/jobs",
-																									"search=search #{CGI::escape(search)}",
-																									{'authorization' => "Splunk #{$session_token}"}))
-			(res/"//sid").inner_html
+		# Create a job
+		#
+		# 'query' is the search string you are passing to Splunk
+		# 'options' can be found at http://docs.splunk.com/Documentation/Splunk/4.2.2/RESTAPI/RESTsearch#POST_search.2Fjobs
+		#
+		def create_job(query, options={})
+			options[:earliest_time] ||= '-15m'
+			[:earliest_time, :latest_time, :time].each { |t| options[t] = format_time(options[t]) if options[t] }
+			response = connection.post do |req|
+				req.url 'search/jobs'
+				req.body = { :search => "search #{query}" }.merge(options)
+			end
+			return_error_or_body(response, response.body)
 		end
 
 		# Return results from a job using the job SID
 		def job_results(sid)
-			res = Hpricot(Rsplunk.splunk_ssl_get_request("/services/search/jobs/#{sid}/results",
-                             											 {'authorization' => "Splunk #{$session_token}"}))
-
-  	end
-
-  	# Delete jobs using the job SID
-		def delete_job(sid)
-			res = Hpricot(Rsplunk.splunk_ssl_delete_request("/services/search/jobs/#{sid}",
-                            													{'authorization' => "Splunk #{$session_token}"}))
+			response = connection.get("search/jobs/#{sid}/results")
+			return_error_or_body(response, response.body)
 		end
 
+		def delete_job(sid)
+			response = connection.delete("search/jobs/#{sid}")
+			return_error_or_body(response, response.body)
+		end
+
+
+		private
+
+		def format_time(time)
+    	time.is_a?(Time) ? time.strftime('%Y-%m-%dT%H:%M:%S%z') : time.to_s
+  	end
+
 	end
-
-	private
-
-	def search_request
-		Hpricot(Rsplunk.splunk_ssl_post_request("/services/search/jobs/",
-																						nil,
-															  						{'authorization' => "Splunk #{$session_token}"}))
-	end
-
 end
