@@ -2,11 +2,10 @@ History.txt
 Manifest.txt
 README.txt
 Rakefile
-bin/rsplunk
 lib/rsplunk.rb
 lib/rsplunk/api_error.rb
 lib/rsplunk/client.rb
 lib/rsplunk/search.rb
 spec/spec_helper.rb
 spec/rsplunk_spec.rb
-test/test_rsplunk.rb
+

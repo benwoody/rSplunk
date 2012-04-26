@@ -9,8 +9,10 @@ module Rsplunk
       @response = response
     end
 
+    # Return the HTTP code and response
+    # (404):Unknown sid
     def message
-      "(#{@code}):#{@response}"
+      "(#{@code}):#{@response["response"]["messages"]["msg"]}"
     end
     alias :to_s :message
   end
