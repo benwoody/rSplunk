@@ -2,9 +2,13 @@ module Rsplunk
 	module Search
 
 		# Returns an XML with all of the current running jobs
-		def list_jobs
-			response = connection.get('search/jobs')
-			return_error_or_body(response, response.body)
+		def list_jobs(options = {})
+			# options[:output_mode] ||= 'json'
+			response = connection.get do |req|
+				req.url ('search/jobs')
+				req.body = options
+			end
+			return_error_or_body(response, response)
 		end
 
 		# Create a job
