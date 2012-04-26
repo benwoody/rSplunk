@@ -32,7 +32,9 @@ module Rsplunk
       end
     end
 
-    # This is created in Splunk.set
+    private
+
+    # This is created in Rsplunk.set
     def api_url
       "https://#{$host}:#{$port}/services/"
     end
@@ -45,8 +47,6 @@ module Rsplunk
         raise Rsplunk::APIError.new(response, response.body)
       end
     end
-
-    private
 
     def default_headers
       headers = {
