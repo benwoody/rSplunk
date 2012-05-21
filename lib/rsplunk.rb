@@ -5,7 +5,7 @@ $:.unshift( File.dirname( __FILE__ ))
 
 module Rsplunk
 
-  VERSION = '0.3.1'
+  VERSION = '0.4.0'
 
   require 'rsplunk/search'
   require 'rsplunk/client'
