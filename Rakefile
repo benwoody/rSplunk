@@ -9,9 +9,7 @@ Hoe.spec 'rsplunk' do
 
   self.rubyforge_name = 'rsplunk'
 
-  dependency 'hpricot', '~> 0.8.6'
+  dependency 'faraday', '~> 0.8.0'
+  dependency 'faraday_middleware', '~> 0.8.7'
 
 end
-
-
-
